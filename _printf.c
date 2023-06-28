@@ -17,43 +17,27 @@
 
 int _printf(const char *format, ...)
 {
-int (*pf)(va_list, flags_t *);
-const char *p;
-flags_t flgs = {0, 0, 0}
-reg count = 0;
-va_start(args, format);
+	va_list ptr;
+	int (*f)(va_list ptr);
+	int i;
 
-if (!format || (format[0] == '%' && !format[1]))
-{
-	return (-1);
-}
-if (format[0] == '%' && format[1] == ' ' && !format[2])
-{
-	return (-1);
-}
-for (p = format; *p; p++)
-{
-	if (*p == '%')
+	va_start(ptr, format);
+	i = 0;
+	if (!format || (format[0] == '%' && !format[1]))
 	{
-		p++;
-		if (*p == '%')
+		return (-1);
+	}
+	for (; *format != '%')
+	{
+		if (*format != '%')
 		{
-			count += _putchar('%');
+			i += _putchar(*format);
 			continue;
 		}
-		while (get_flag(*p, &flags))
-		{
-			p++
-		}
-		pf = get_print(*p);
-		count += (pf)
-			? pf(arg, &flags)
-			: _printf("%%%c", *p);
+	format++;
+	f = check(*format);
+	i += f ? f(ptr) : _printf("%%%c", *format);
 	}
-	else
-	count += _putchar(*p);
-}
-_putchar(-1);
-va_end(arg);
-return (count);
+	va_end(ptr);
+	return (i);
 }
