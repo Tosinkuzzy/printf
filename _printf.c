@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include "main.h"
 #include <limits.h>
+#include <stdarg.h>
 /**
  * _printf - Entry p
  * @format: Produces output accordingly
@@ -27,7 +28,7 @@ int _printf(const char *format, ...)
 	{
 		return (-1);
 	}
-	for (; *format != '%')
+	for (; *format; format++)
 	{
 		if (*format != '%')
 		{
@@ -35,7 +36,7 @@ int _printf(const char *format, ...)
 			continue;
 		}
 	format++;
-	f = check(*format);
+	f = check_type(*format);
 	i += f ? f(ptr) : _printf("%%%c", *format);
 	}
 	va_end(ptr);

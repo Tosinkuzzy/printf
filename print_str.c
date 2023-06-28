@@ -15,9 +15,9 @@ int print_str(va_list ptr)
 
 	s = va_arg(ptr, char *);
 
-	if (s != '\0')
+	if (s != NULL)
 		n = print_puts(s);
 	else
-		n = print_puts("('\0')");
+		n = print_puts("(null)");
 	return (n);
 }

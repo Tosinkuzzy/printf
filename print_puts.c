@@ -17,7 +17,7 @@ int print_puts(char *s)
 	i = 0;
 	while (*s)
 	{
-		n += _putchar(*s);
+		i += _putchar(*s);
 		s++;
 	}
 	return (i);

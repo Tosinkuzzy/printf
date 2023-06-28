@@ -3,13 +3,14 @@
  * Author: Team project
  */
 
-#ifndef main_h
-#define main_h
+#ifndef MAIN_H
+#define MAIN_H
 
 #include <stdlib.h>
 #include <stdarg.h>
+#include <stddef.h>
 /**
- * struct printHandler - Entry p
+ * struct check - Entry p
  * des: struct to choose the right function depending
  * @c: format specifier
  * @f: pointer to the correct printing function
@@ -18,10 +19,10 @@ typedef struct check
 {
 	char c;
 	int (*f)(va_list str);
-} check;
+} check_t;
 
 int _printf(const char *format, ...);
-int (*check(char c))(va_list str);
+int (*check_type(char c))(va_list str);
 int _putchar(char c);
 int print_puts(char *s);
 int print_char(va_list ptr);

@@ -6,6 +6,7 @@
  * @c: character
  * return: count
  */
+int _putchar(char c)
 {
 	int i;
 
