@@ -33,13 +33,13 @@ int print_int(va_list l, flags_t *f)
 }
 
 /**
- * unsign - Entry p
+ *print_ unsigned - Entry p
  * des: prints an unsigned integer
  * @l: va_list of arg
  * @f: pointer to the struct flags determining
  * Return: number of char printed
  */
-int unsign(va_list l, flags_t *f)
+int print_unsigned(va_list l, flags_t *f)
 {
 	unsigned int i = va_arg(l, unsigned int);
 	char *ptr = convert(i, 10, 0);
@@ -49,12 +49,11 @@ int unsign(va_list l, flags_t *f)
 }
 
 /**
- * number - Entry p
+ * print_number - Entry p
  * des: helper function that loops through
- *
  * @n: integer to be printed
  */
-void number(int n)
+void print_number(int n)
 {
 	unsigned int n1;
 

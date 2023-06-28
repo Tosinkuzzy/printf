@@ -5,14 +5,13 @@
 #include "main.h"
 
 /**
- * big - Entry p
+ * print_big - Entry p
  * des: Non printable characters (0 < ASCII value < 32 or >= 127) are
  * @l: va_list arg
  * @f: pointer to the struct flags that determines
- *
  * Return: number of char printed
  */
-int big(va_list l, flags_t *f)
+int print_big(va_list l, flags_t *f)
 {
 	int i, count = 0;
 	char *result;
@@ -42,13 +41,13 @@ int big(va_list l, flags_t *f)
 }
 
 /**
- * rev - Entry p
+ * print_reverse - Entry p
  * des: prints a string in reverse
  * @l: argument from _printf
  * @f: pointer to the struct flags that determines
  * Return: length of the printed string
  */
-int rev(va_list l, flags_t *f)
+int print_reverse(va_list l, flags_t *f)
 {
 	int i = 0, ptr;
 	char *s = va_arg(l, char *);
@@ -73,13 +72,13 @@ int rev(va_list l, flags_t *f)
 }
 
 /**
- * rot13 - Entry p
+ * print_rot13 - Entry p
  * des: prints a string using rot13
  * @l: list of arguments from _printf
  * @f: pointer to the struct flags that determines
  * Return: length of the printed string
  */
-int rot13(va_list l, flags_t *f)
+int print_rot13(va_list l, flags_t *f)
 {
 	int i, ptr;
 	char rot13[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -106,13 +105,13 @@ int rot13(va_list l, flags_t *f)
 }
 
 /**
- * percent - Entry p
+ * print_percent - Entry p
  * des: prints a percent
  * @l: va_list arguments from _printf
  * @f: pointer to the struct flags in which we turn the flags on
  * Return: number of char printed
  */
-int percent(va_list l, flags_t *f)
+int print_percent(va_list l, flags_t *f)
 {
 	(void)l;
 	(void)f;

@@ -5,14 +5,13 @@
 #include "main.h"
 
 /**
- * hex - Entry p
+ * print_hex - Entry p
  * @l: va_list arg
  * @f: pointer to the struct flags that determines
- *
  * Des: the function calls convert() which in turns converts the input
  * Return: the number of char printed
  */
-int hex(va_list l, flags_t *f)
+int print_hex(va_list l, flags_t *f)
 {
 	unsigned int num = va_arg(l, unsigned int);
 	char *str = conversion(num, 16, 1);
@@ -25,13 +24,13 @@ int hex(va_list l, flags_t *f)
 }
 
 /**
- * hex_big - Entry p
+ * print_hex_big - Entry p
  * @l: va_list arg
  * @f: pointer to the struct that determines
  * Des: the function calls convert() which in turns converts the input
  * Return: the number of char printed
  */
-int hex_big(va_list l, flags_t *f)
+int print_hex_big(va_list l, flags_t *f)
 {
 	unsigned int num = va_arg(l, unsigned int);
 	char *str = conversion(num, 16, 0);
@@ -44,13 +43,13 @@ int hex_big(va_list l, flags_t *f)
 }
 
 /**
- * binary - Entry p
+ * print_binary - Entry p
  * @l: va_list arg
  * @f: pointer to the struct that determines
  * Des: the function calls convert() which in turns converts the input
  * Return: the number of char printed
  */
-int binary(va_list l, flags_t *f)
+int print_binary(va_list l, flags_t *f)
 {
 	unsigned int num = va_arg(l, unsigned int);
 	char *str = conversion(num, 2, 0);
@@ -60,14 +59,13 @@ int binary(va_list l, flags_t *f)
 }
 
 /**
- * octal - Entry p
+ * print_octal - Entry p
  * @l: va_list arguments from _printf
  * @f: pointer to the struct that determines
- * if a flag is passed to _printf
  * Des: the function calls convert() which in turns converts the input
  * Return: the number of char printed
  */
-int octal(va_list l, flags_t *f)
+int print_octal(va_list l, flags_t *f)
 {
 	unsigned int num = va_arg(l, unsigned int);
 	char *str = conversion(num, 8, 0);

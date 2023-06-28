@@ -16,6 +16,7 @@ int _putchar(char c)
 	static char buff[1024];
 	static int i;
 
+
 	if (c == -1 || i >= 1024)
 	{
 		write(1, &buff, i);
@@ -23,7 +24,7 @@ int _putchar(char c)
 	}
 	if (c != -1)
 	{
-		buf[i] = c;
+		buff[i] = c;
 		i++;
 	}
 	return (1);
@@ -39,9 +40,9 @@ int _puts(char *ptr)
 {
 	register int i;
 
-	for (i = 0; str[i] != '\0'; i++)
+	for (i = 0; ptr[i] != '\0'; i++)
 	{
-		_putchar(str[i]);
+		_putchar(ptr[i]);
 	}
 	return (i);
 }

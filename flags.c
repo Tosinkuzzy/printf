@@ -12,22 +12,22 @@
  *
  * Return: 1 if a flag has been turned on, 0 otherwise
  */
-int get_flag(char s, flags_t *fl)
+int get_flag(char s, flags_t *f)
 {
 	int i = 0;
 
 	switch (s)
 	{
 		case '+':
-			fl->add = 1;
+			f->add = 1;
 			i = 1;
 			break;
 		case ' ':
-			fl->space = 1;
+			f->space = 1;
 			i = 1;
 			break;
 		case '#':
-			fl->notation = 1;
+			f->notation = 1;
 			i = 1;
 			break;
 	}

@@ -5,14 +5,14 @@
 #include "main.h"
 
 /**
- * addres - Entry p
+ * print_address - Entry p
  * des:  prints address of input in hexa format
  * @l: va_list arguments from _printf
  * @f: pointer to the struct flags that determines
  *
  * Return: number of char printed
  */
-int addres(va_list l, flags_t *f)
+int print_addres(va_list l, flags_t *f)
 {
 	char *str;
 	unsigned long int p = va_arg(l, unsigned long int);
