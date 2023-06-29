@@ -1,15 +1,14 @@
 #include "main.h"
-#include <unistd.h>
 
 /**
  * _putchar - Entry p
+ * dse:writes the character c to stdout
  * @c: character
- * return: count
+ *
+ * Return: On success 1.
  */
+
 int _putchar(char c)
 {
-	int i;
-
-	i = write(1, &c, 1);
-	return (i);
+	return (write(1, &c, 1));
 }

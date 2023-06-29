@@ -1,72 +1,77 @@
 /*
- * File: Printf
- * Author: Team project
+ * File: _printf.c
+ * Author: Team collaboration
  */
 #include "main.h"
 
-void print_buffer(char buffer[], int *buff_ind);
+/**
+ * print_string - Entry p
+ * des: Print terminated string
+ * @ptr: string
+ *
+ * Return: The number of characters printed
+ */
+int print_string(char *ptr)
+{
+	int str = 0;
+	int j = 0;
+
+	while (ptr[j] != '\0')
+	{
+		str += write(STDOUT_FILENO, &ptr[j], 1);
+		j++;
+	}
+
+	return (str);
+}
 
 /**
  * _printf - Entry p
- * des: Printf function
- * @format: format.
- * Return: Printed chars.
+ * des: print implementation
+ * @format: format
+ *
+ * Return: characters
  */
 int _printf(const char *format, ...)
 {
-	int j, printed = 0, printed_chars = 0;
-	int flags, width, precision, size, buff_ind = 0;
-	va_list list;
-	char buffer[BUFF_SIZE];
+	va_list args;
+	int scan = 0;
 
-if (format == NULL)
-	return (-1);
+	va_start(args, format);
 
-va_start(list, format);
-
-for (j = 0; format && format[j] != '\0'; j++)
+while (*format != '\0')
 {
-	if (format[j] != '%')
+	if (*format == '%')
 	{
-		buffer[buff_ind++] = format[j];
+		format++;
+		switch (*format)
+		{
+			case 'c':
+				{
+					int str = va_arg(args, int);
 
-		if (buff_ind == BUFF_SIZE)
-			print_buffer(buffer, &buff_ind);
-
-		printed_chars++;
+				scan += write(STDOUT_FILENO, &str, 1);
+				break;
+				}
+			case 's':
+				scan += print_string(va_arg(args, char *));
+				break;
+			case '%':
+				scan += write(STDOUT_FILENO, "%", 1);
+				break;
+			default:
+				scan += write(STDOUT_FILENO, "%", 1);
+				scan += write(STDOUT_FILENO, format, 1);
+				break;
+		}
 	}
 	else
 	{
-		print_buffer(buffer, &buff_ind);
-		flags = get_flags(format, &j);
-		width = get_width(format, &j, list);
-		precision = get_precision(format, &j, list);
-		size = get_size(format, &j);
-		++j;
-		printed = handle_print(format, &j, list, buffer,
-				flags, width, precision, size);
-		if (printed == -1)
-			return (-1);
-		printed_chars += printed;
+		scan += write(STDOUT_FILENO, format, 1);
 	}
+
+	format++;
 }
-print_buffer(buffer, &buff_ind);
-
-va_end(list);
-
-return (printed_chars);
-}
-
-/**
- * print_buffer - Entry p
- * des: Prints the contents.
- * @buffer: Array
- * @buff_ind: Index at which to add next char, represents the length.
- */
-void print_buffer(char buffer[], int *buff_ind)
-{
-	if (*buff_ind > 0)
-		write(1, &buffer[0], *buff_ind);
-
-	*buff_ind = 0;
+va_end(args);
+return (scan);
 }
