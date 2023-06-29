@@ -2,43 +2,71 @@
  * File: Printf
  * Author: Team project
  */
-
-#include <stdio.h>
 #include "main.h"
-#include <limits.h>
-#include <stdarg.h>
+
+void print_buffer(char buffer[], int *buff_ind);
+
 /**
  * _printf - Entry p
- * @format: Produces output accordingly
- * Des: function will call the get_print() function
- * that will determine which func to call.
- *
- * Return: formatted output string.
+ * des: Printf function
+ * @format: format.
+ * Return: Printed chars.
  */
-
 int _printf(const char *format, ...)
 {
-	va_list ptr;
-	int (*f)(va_list ptr);
-	int i;
+	int j, printed = 0, printed_chars = 0;
+	int flags, width, precision, size, buff_ind = 0;
+	va_list list;
+	char buffer[BUFF_SIZE];
 
-	va_start(ptr, format);
-	i = 0;
-	if (!format || (format[0] == '%' && !format[1]))
+if (format == NULL)
+	return (-1);
+
+va_start(list, format);
+
+for (j = 0; format && format[j] != '\0'; j++)
+{
+	if (format[j] != '%')
 	{
-		return (-1);
+		buffer[buff_ind++] = format[j];
+
+		if (buff_ind == BUFF_SIZE)
+			print_buffer(buffer, &buff_ind);
+
+		printed_chars++;
 	}
-	for (; *format; format++)
+	else
 	{
-		if (*format != '%')
-		{
-			i += _putchar(*format);
-			continue;
-		}
-	format++;
-	f = check_type(*format);
-	i += f ? f(ptr) : _printf("%%%c", *format);
+		print_buffer(buffer, &buff_ind);
+		flags = get_flags(format, &j);
+		width = get_width(format, &j, list);
+		precision = get_precision(format, &j, list);
+		size = get_size(format, &j);
+		++j;
+		printed = handle_print(format, &j, list, buffer,
+				flags, width, precision, size);
+		if (printed == -1)
+			return (-1);
+		printed_chars += printed;
 	}
-	va_end(ptr);
-	return (i);
+}
+print_buffer(buffer, &buff_ind);
+
+va_end(list);
+
+return (printed_chars);
+}
+
+/**
+ * print_buffer - Entry p
+ * des: Prints the contents.
+ * @buffer: Array
+ * @buff_ind: Index at which to add next char, represents the length.
+ */
+void print_buffer(char buffer[], int *buff_ind)
+{
+	if (*buff_ind > 0)
+		write(1, &buffer[0], *buff_ind);
+
+	*buff_ind = 0;
 }
