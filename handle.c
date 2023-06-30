@@ -1,71 +1,36 @@
 /*
  * File: handle.c
- * Author: Team collaboration
+ * Author: Team collaboration.int _putchar(char c);
  */
 #include "main.h"
-
 /**
- * print_integer - Entry p
- * des: Print an integer
- * @i: integer
+ * print_int - Prints integer using putchar.
+ * @args: A va_list containing the integer argument.
  *
- * Return: The number of characters printed
+ * Return: number of characters printed.
  */
-int print_integer(int i)
+int print_int(va_list args)
 {
-	int pr = 0;
+	int i;
+	int scan = 0;
 
-	if (i < 0)
-	{
-		pr += _putchar('-');
-		i = -i;
-	}
-	if (i / 10)
-		pr += print_integer(i / 10);
-	pr += _putchar('0' + (i % 10));
-
-	return (pr);
+	i = va_arg(args, int);
+	scan = print_int_helper(i);
+	return (scan);
 }
 
 /**
- * handle - Entry p
- * des: handle format specifier
- * @format: Format
- * @args: arguments
- * @scan: characters
+ * print_binary - Prints an unsigned integer in binary format.
+ * @args: The argument list.
  *
- * Return: 0, 1 otherwise
+ * Return: number of characters printed.
  */
-int handle(const char *format, va_list args, int scan)
+int print_binary(va_list args)
 {
-	switch (*format)
-	{
-		case 'c':
-			{
-				int ch = va_arg(args, int);
+	unsigned int i;
+	int scan = 0;
 
-				scan += putchar(ch);
-				break;
-			}
-		case 's':
-			scan += print_string(va_arg(args, char *));
-			break;
-		case 'd':
-		case 'i':
-			{
-				int num = va_arg(args, int);
-
-				scan += print_integer(num);
-				break;
-			}
-		case '%':
-			scan += putchar('%');
-			break;
-		default:
-			scan += putchar('%');
-			scan += putchar(*format);
-			break;
-	}
-
+	i = va_arg(args, unsigned int);
+	scan = print_binary_helper(i);
 	return (scan);
 }
