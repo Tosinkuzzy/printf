@@ -1,3 +1,4 @@
+Author: Tosinkuzzy
 0x11. C - printf
 For this project we wrote our printf function. it is cohort 15 project for ALX AFRICA.
 Our version of printf handles the following conversion specifiers:
